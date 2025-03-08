@@ -1,3 +1,13 @@
+
+<?php
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header("Location: admin-login.php");
+    exit;
+}
+?>
+
+
 <?php
 $servername = "localhost";
 $username = "root";
@@ -103,7 +113,7 @@ $result = $conn->query($sql);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="view-appointments.php">Admin Panel</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="logout.php">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -115,7 +125,7 @@ $result = $conn->query($sql);
         
         <?php if ($result->num_rows > 0) { ?>
             <div class="table-responsive">
-                <table class="table table-striped table-hover table-dark">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -143,10 +153,7 @@ $result = $conn->query($sql);
                 No appointments found.
             </div>
         <?php } ?>
-        
-        <div class="text-center mt-4">
-            <a href="index.html" class="btn btn-custom">Back to Home</a>
-        </div>
+    
     </div>
 
     <!-- JavaScript for Fade-in Effect on Table Rows -->
