@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 if (!isset($_SESSION['admin_logged_in'])) {
@@ -25,35 +24,42 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Panel - Booked Appointments</title>
-    
+
     <!-- Bootstrap & Custom Styles -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/vendor/fontawesome-pro.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    
+
     <style>
         body {
             background-color: #f5f5f5;
         }
+
         /* Navbar Styling */
         .navbar {
-            background-color: #434e44; /* Updated Theme Color */
+            background-color: #434e44;
+            /* Updated Theme Color */
         }
+
         .navbar-brand img {
             height: 50px;
         }
-        .navbar-brand, .nav-link {
+
+        .navbar-brand,
+        .nav-link {
             color: white !important;
             font-weight: bold;
         }
+
         .nav-link:hover {
             opacity: 0.8;
         }
-        
+
         /* Table Styling */
         .table-container {
             margin-top: 30px;
@@ -65,24 +71,29 @@ $result = $conn->query($sql);
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
         }
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .table thead {
-            background-color: #739E77; /* Updated Theme Color */
+            background-color: #739E77;
+            /* Updated Theme Color */
             color: white;
         }
+
         .table tbody tr {
             transition: all 0.3s ease-in-out;
         }
+
         .table tbody tr:hover {
             background-color: rgba(115, 158, 119, 0.2);
             transform: scale(1.02);
         }
-        
+
         /* Button Styling */
         .btn-custom {
             background-color: #739E77;
@@ -93,12 +104,14 @@ $result = $conn->query($sql);
             border-radius: 5px;
             transition: 0.3s ease;
         }
+
         .btn-custom:hover {
             background-color: #5e8863;
             transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navigation Bar -->
@@ -122,7 +135,7 @@ $result = $conn->query($sql);
     <!-- Appointments Table -->
     <div class="container table-container">
         <h2 class="text-center mb-4">Booked Appointments</h2>
-        
+
         <?php if ($result->num_rows > 0) { ?>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
@@ -153,7 +166,7 @@ $result = $conn->query($sql);
                 No appointments found.
             </div>
         <?php } ?>
-    
+
     </div>
 
     <!-- JavaScript for Fade-in Effect on Table Rows -->
@@ -172,6 +185,7 @@ $result = $conn->query($sql);
 
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
 
 <?php $conn->close(); ?>
