@@ -1146,7 +1146,7 @@
         // Set the minimum date to today to disable past dates
         dateInput.setAttribute("min", minDate);
 
-        // Function to populate available time slots
+        // Function to populate time slots
         function updateAvailableTimes() {
           console.log("updateAvailableTimes called"); // Debugging
           timeDropdown.innerHTML = ""; // Clear previous options
@@ -1156,20 +1156,19 @@
             return;
           }
 
-          // Define available time slots
-          let availableTimes = [
-            "09:00 AM",
-            "09:30 AM",
-            "10:00 AM",
-            "10:30 AM",
-            "11:00 AM",
-            "11:30 AM",
-            "02:00 PM",
-            "02:30 PM",
-            "03:00 PM",
-            "03:30 PM",
-            "04:00 PM",
-          ];
+          // Define all possible time slots from 9:00 AM to 9:00 PM
+          let allTimes = [];
+          for (let hour = 9; hour <= 21; hour++) {
+            let suffix = hour < 12 ? "AM" : "PM";
+            let formattedHour = hour > 12 ? hour - 12 : hour; // Convert to 12-hour format
+            allTimes.push(`${formattedHour}:00 ${suffix}`);
+            allTimes.push(`${formattedHour}:30 ${suffix}`);
+          }
+
+          // Define working hours (valid time range)
+          let isWorkingHour = (hour, minute) => {
+            return (hour >= 9 && hour < 13) || (hour >= 16 && hour < 21); // 9AM-1PM, 4PM-9PM
+          };
 
           // Add default "Select Time" option
           let defaultOption = document.createElement("option");
@@ -1179,15 +1178,23 @@
           defaultOption.selected = true;
           timeDropdown.appendChild(defaultOption);
 
-          // Add available time slots
-          availableTimes.forEach((time) => {
+          // Populate time slots with disabled non-working hours
+          allTimes.forEach((time) => {
+            let [timePart, period] = time.split(" ");
+            let [hour, minute] = timePart.split(":").map(Number);
+
+            // Convert to 24-hour format for checking working hours
+            if (period === "PM" && hour !== 12) hour += 12;
+
             let option = document.createElement("option");
             option.value = time;
             option.textContent = time;
+            option.disabled = !isWorkingHour(hour, minute); // Disable non-working times
+
             timeDropdown.appendChild(option);
           });
 
-          // Enable the time dropdown after populating
+          // Enable the time dropdown
           timeDropdown.disabled = false;
           console.log("Time dropdown enabled"); // Debugging
         }
