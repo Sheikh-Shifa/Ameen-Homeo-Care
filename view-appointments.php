@@ -8,10 +8,10 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "homeopathy_clinic";
+$servername = "sql312.byethost3.com";
+$username = "b3_38472809";
+$password = "Shahidameen@1811";
+$dbname = "b3_38472809_homeopathy_clinic";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {

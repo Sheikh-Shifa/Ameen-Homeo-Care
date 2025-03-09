@@ -1,9 +1,9 @@
 <?php
 // Database connection settings
-$servername = "localhost";
-$username = "root"; // Change this if necessary
-$password = ""; // Change this if you have a password set
-$dbname = "homeopathy_clinic";
+$servername = "b3_38472809_homeopathy_clinic";
+$username = "b3_38472809"; // Change this if necessary
+$password = "Shahidameen@1811"; // Change this if you have a password set
+$dbname = "sql312.byethost3.com";
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
